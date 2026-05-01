@@ -1,5 +1,5 @@
 import {
-  Component, Input, inject, signal, OnInit, HostListener
+  Component, Input, inject, signal, computed, OnInit, HostListener
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -101,12 +101,10 @@ import { UiStateService } from '../../core/services/ui-state.service';
               @for (cat of categories(); track cat.slug) {
                 <label class="flex items-center gap-3 cursor-pointer group">
                   <input
-                    type="radio"
-                    name="category"
-                    [value]="cat.slug"
+                    type="checkbox"
                     [checked]="productService.filter().category === cat.slug"
-                    (change)="productService.updateFilter({ category: cat.slug })"
-                    class="w-4 h-4 text-primary border-border focus:ring-primary rounded-full"
+                    (change)="toggleCategory(cat.slug)"
+                    class="w-4 h-4 text-primary border-border focus:ring-primary rounded"
                   />
                   <span class="text-sm text-text-muted group-hover:text-text transition-colors flex-1">
                     {{ cat.name }}
@@ -241,7 +239,12 @@ export class FilterDrawerComponent implements OnInit {
   drawerOpen = this.uiState.filterDrawerOpen;
 
   expandedSections = signal<Set<string>>(new Set(['category', 'price']));
-  activePricePreset = signal<string>('');
+
+  activePricePreset = computed(() => {
+    const f = this.productService.filter();
+    const match = this.pricePresets.find(p => p.min === f.minPrice && p.max === f.maxPrice);
+    return match?.label ?? '';
+  });
 
   readonly pricePresets = [
     { label: 'Under ₹1K',  min: null, max: 1000  },
@@ -268,9 +271,17 @@ export class FilterDrawerComponent implements OnInit {
     });
   }
 
+  toggleCategory(slug: string): void {
+    const current = this.productService.filter().category;
+    this.productService.updateFilter({ category: current === slug ? 'all' : slug });
+  }
+
   applyPricePreset(preset: { label: string; min: number | null; max: number | null }): void {
-    this.activePricePreset.set(preset.label);
-    this.productService.updateFilter({ minPrice: preset.min, maxPrice: preset.max });
+    if (this.activePricePreset() === preset.label) {
+      this.productService.updateFilter({ minPrice: null, maxPrice: null });
+    } else {
+      this.productService.updateFilter({ minPrice: preset.min, maxPrice: preset.max });
+    }
   }
 
   applyAndClose(): void {
@@ -278,7 +289,6 @@ export class FilterDrawerComponent implements OnInit {
   }
 
   clearAll(): void {
-    this.activePricePreset.set('');
     this.productService.resetFilter();
     if (!this.inline) this.uiState.closeFilterDrawer();
   }

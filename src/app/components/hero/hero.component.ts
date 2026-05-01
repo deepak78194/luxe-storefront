@@ -98,7 +98,6 @@ interface HeroSlide {
             </div>
           </div>
         }
-      </div>
 
       <!-- Slide indicators -->
       <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2" role="tablist">
@@ -115,6 +114,7 @@ interface HeroSlide {
             [attr.aria-label]="'Go to slide ' + (i + 1)"
           ></button>
         }
+      </div>
       </div>
 
       <!-- Category highlights strip -->
