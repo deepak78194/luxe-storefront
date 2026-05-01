@@ -41,3 +41,4 @@ sanity-studio/dist
 
 # Environment files (keep templates, ignore real secrets)
 # src/environments/environment.ts  — kept (uses placeholder IDs, no real secrets)
+node_modules
