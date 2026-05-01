@@ -85,7 +85,7 @@ import { WhatsAppService } from '../../core/services/whatsapp.service';
 
         <!-- Quick view overlay -->
         <div class="absolute bottom-0 left-0 right-0 p-3
-          translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-300">
           <button
             class="btn btn-primary w-full text-sm py-2.5"
             (click)="openQuickView($event)"
@@ -165,7 +165,7 @@ import { WhatsAppService } from '../../core/services/whatsapp.service';
               <line x1="3" y1="6" x2="21" y2="6"/>
               <path d="M16 10a4 4 0 0 1-8 0"/>
             </svg>
-            <span class="truncate">{{ product.inStock ? 'Add to Cart' : 'Sold Out' }}</span>
+            <span class="hidden sm:inline truncate">{{ product.inStock ? 'Add to Cart' : 'Sold Out' }}</span>
           </button>
 
           <!-- WhatsApp order (icon-only square button) -->

@@ -155,10 +155,9 @@ import { FilterDrawerComponent } from '../filter-drawer/filter-drawer.component'
           <div class="flex-1 min-w-0">
             @if (productService.loading()) {
               <!-- Skeleton loader -->
-              <div class="grid gap-5"
-                [class.grid-cols-2]="gridCols() <= 2"
-                [class.grid-cols-3]="gridCols() === 3"
-                [class.grid-cols-4]="gridCols() === 4"
+              <div class="grid gap-5 grid-cols-1 sm:grid-cols-2"
+                [class.md:grid-cols-3]="gridCols() === 3"
+                [class.md:grid-cols-4]="gridCols() === 4"
               >
                 @for (n of [1,2,3,4,5,6,7,8]; track n) {
                   <div class="card">
@@ -189,8 +188,7 @@ import { FilterDrawerComponent } from '../filter-drawer/filter-drawer.component'
             } @else {
               <!-- Products -->
               <div
-                class="grid gap-4 md:gap-5"
-                [class.grid-cols-2]="true"
+                class="grid gap-4 md:gap-5 grid-cols-1 sm:grid-cols-2"
                 [class.md:grid-cols-3]="gridCols() >= 3"
                 [class.lg:grid-cols-3]="gridCols() === 3"
                 [class.lg:grid-cols-4]="gridCols() === 4"
