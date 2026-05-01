@@ -26,14 +26,14 @@ import { Product } from '../../core/models/product.model';
 
       <!-- Modal -->
       <div
-        class="fixed inset-0 z-[60] flex items-end md:items-center justify-center p-0 md:p-6"
+        class="fixed inset-0 z-[60] flex items-center justify-center p-4 md:p-6"
         role="dialog"
         aria-modal="true"
         [attr.aria-labelledby]="'modal-title-' + product()?.id"
       >
         <div
-          class="bg-white w-full md:max-w-4xl lg:max-w-5xl max-h-[95vh] md:max-h-[90vh]
-            overflow-y-auto rounded-t-3xl md:rounded-2xl shadow-modal animate-scale-in
+          class="bg-white w-full max-w-lg md:max-w-4xl lg:max-w-5xl max-h-[85vh]
+            overflow-y-auto rounded-2xl shadow-modal animate-scale-in
             scrollbar-hide"
         >
           <!-- Modal header -->
@@ -283,7 +283,7 @@ import { Product } from '../../core/models/product.model';
             @if (relatedProducts().length > 0) {
               <div class="border-t border-border p-6 md:p-8">
                 <h3 class="font-heading text-xl font-semibold mb-6">You may also like</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                   @for (rp of relatedProducts(); track rp.id) {
                     <app-product-card [product]="rp"></app-product-card>
                   }

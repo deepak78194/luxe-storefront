@@ -85,7 +85,7 @@ import { WhatsAppService } from '../../core/services/whatsapp.service';
 
         <!-- Quick view overlay -->
         <div class="absolute bottom-0 left-0 right-0 p-3
-          sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-300">
+          [@media(hover:hover)]:translate-y-full [@media(hover:hover)]:group-hover:translate-y-0 transition-transform duration-300">
           <button
             class="btn btn-primary w-full text-sm py-2.5"
             (click)="openQuickView($event)"
