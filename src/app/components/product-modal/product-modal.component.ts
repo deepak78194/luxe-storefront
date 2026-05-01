@@ -63,11 +63,11 @@ import { Product } from '../../core/models/product.model';
               <!-- ── Image Gallery ──────────────────────────────── -->
               <div class="relative bg-surface-2">
                 <!-- Main image -->
-                <div class="aspect-[4/5] overflow-hidden">
+                <div class="aspect-[4/5] overflow-hidden p-4 flex items-center justify-center bg-surface-2">
                   <img
                     [src]="selectedImage()"
                     [alt]="p.name"
-                    class="w-full h-full object-cover"
+                    class="max-w-full max-h-full object-contain rounded-xl"
                     loading="eager"
                   />
                 </div>
