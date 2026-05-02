@@ -1,1 +1,2 @@
-/* /index.html 200
+# Cloudflare Pages does not support SPA wildcard redirects.
+# SPA routing is handled by 404.html (copied from index.html in post-build).
