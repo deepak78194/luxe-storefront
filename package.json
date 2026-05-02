@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
-    "postbuild:prod": "node -e \"const fs=require('fs'),p=require('path').join(process.cwd(),'dist/luxe-storefront/browser');fs.copyFileSync(p+'/index.html',p+'/404.html');console.log('✓  Copied index.html → 404.html');\"",
+    "postbuild:prod": "node -e \"const fs=require('fs'),p=require('path').join(process.cwd(),'dist/luxe-storefront/browser');const src=fs.existsSync(p+'/index.html')?p+'/index.html':p+'/index.csr.html';fs.copyFileSync(src,p+'/404.html');console.log('Copied '+src.split('/').pop()+' to 404.html');\",
     "build:ssr": "ng build --configuration production && ng run luxe-storefront:server:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
