@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-footer',
@@ -162,7 +163,7 @@ import { CommonModule } from '@angular/common';
 export class FooterComponent {
   readonly socialLinks = [
     { name: 'Instagram', emoji: '📸', href: '#' },
-    { name: 'WhatsApp', emoji: '💬', href: 'https://wa.me/919876543210' },
+    { name: 'WhatsApp', emoji: '💬', href: 'https://wa.me/' + environment.whatsappPhone },
     { name: 'Facebook', emoji: '👤', href: '#' },
     { name: 'Pinterest', emoji: '📌', href: '#' },
   ];
@@ -185,7 +186,7 @@ export class FooterComponent {
   ];
 
   readonly contactItems = [
-    { emoji: '💬', label: 'WhatsApp Us', href: 'https://wa.me/919876543210' },
+    { emoji: '💬', label: 'WhatsApp Us', href: 'https://wa.me/' + environment.whatsappPhone },
     { emoji: '✉️', label: 'hello@luxe.com', href: 'mailto:hello@luxe.com' },
     { emoji: '📸', label: '@luxe.store', href: '#' },
   ];

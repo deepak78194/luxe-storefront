@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-whatsapp-fab',
@@ -19,7 +20,7 @@ import { CommonModule } from '@angular/common';
 
       <!-- WhatsApp button -->
       <a
-        href="https://wa.me/919876543210?text=Hi! I want to browse your collection and place an order."
+        [href]="'https://wa.me/' + waPhone + '?text=Hi! I want to browse your collection and place an order.'"
         target="_blank"
         rel="noopener noreferrer"
         class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-cta flex items-center justify-center
@@ -41,4 +42,6 @@ import { CommonModule } from '@angular/common';
     :host { display: contents; }
   `],
 })
-export class WhatsAppFabComponent {}
+export class WhatsAppFabComponent {
+  readonly waPhone = environment.whatsappPhone;
+}

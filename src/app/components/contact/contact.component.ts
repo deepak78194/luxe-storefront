@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact',
@@ -210,7 +211,7 @@ import { FormsModule } from '@angular/forms';
                       }
                     </button>
                     <a
-                      href="https://wa.me/919876543210?text=Hi! I have a question."
+                      [href]="'https://wa.me/' + waPhone + '?text=Hi! I have a question.'"
                       target="_blank"
                       rel="noopener noreferrer"
                       class="btn btn-whatsapp flex-1 py-3.5 justify-center"
@@ -231,6 +232,7 @@ import { FormsModule } from '@angular/forms';
   `,
 })
 export class ContactComponent {
+  readonly waPhone = environment.whatsappPhone;
   submitted  = signal(false);
   submitting = signal(false);
 
@@ -245,10 +247,11 @@ export class ContactComponent {
   readonly contactMethods = [
     {
       type: 'WhatsApp',
-      label: '+91 98765 43210',
+      label: '+91 ' + environment.whatsappPhone.slice(2).replace(/(\d{5})(\d{5})/, '$1 $2'),
       emoji: '💬',
       bgColor: 'rgba(37,211,102,0.15)',
-      href: 'https://wa.me/919876543210?text=Hi! I have a question.',
+      href: 'https://wa.me/' + environment.whatsappPhone + '?text=Hi! I have a question.',
+
     },
     {
       type: 'Email',

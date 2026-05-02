@@ -2,6 +2,7 @@ import { Component, inject, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
 import { UiStateService } from '../../core/services/ui-state.service';
+import { environment } from '../../../environments/environment';
 
 interface CollectionCard {
   title: string;
@@ -184,7 +185,7 @@ interface CollectionCard {
               Shop Now
             </a>
             <a
-              href="https://wa.me/919876543210?text=Hi! I want to place an order with free shipping."
+              [href]="'https://wa.me/' + waPhone + '?text=Hi! I want to place an order with free shipping.'"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-whatsapp px-5 py-3 sm:px-8 sm:py-3.5"
@@ -201,6 +202,7 @@ interface CollectionCard {
   `,
 })
 export class FeaturedCollectionsComponent {
+  readonly waPhone = environment.whatsappPhone;
   private productService = inject(ProductService);
   private uiState = inject(UiStateService);
 

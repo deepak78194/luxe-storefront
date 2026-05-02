@@ -2,6 +2,7 @@ import {
   Component, inject, signal, computed, HostListener, OnInit
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../environments/environment';
 import { CartService } from '../../core/services/cart.service';
 import { WishlistService } from '../../core/services/wishlist.service';
 import { UiStateService } from '../../core/services/ui-state.service';
@@ -107,7 +108,7 @@ import { ProductService } from '../../core/services/product.service';
 
             <!-- WhatsApp CTA -->
             <a
-              href="https://wa.me/919876543210?text=Hi! I want to browse your collection."
+              [href]="'https://wa.me/' + waPhone + '?text=Hi! I want to browse your collection.'"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-whatsapp text-sm px-4 py-2 ml-2"
@@ -208,7 +209,7 @@ import { ProductService } from '../../core/services/product.service';
             }
             <div class="pt-3 border-t border-border mt-2">
               <a
-                href="https://wa.me/919876543210?text=Hi! I want to browse your collection."
+                [href]="'https://wa.me/' + waPhone + '?text=Hi! I want to browse your collection.'"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn btn-whatsapp w-full justify-center"
@@ -230,6 +231,7 @@ import { ProductService } from '../../core/services/product.service';
   `,
 })
 export class NavbarComponent implements OnInit {
+  readonly waPhone = environment.whatsappPhone;
   cartService    = inject(CartService);
   wishlistService = inject(WishlistService);
   uiState        = inject(UiStateService);

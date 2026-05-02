@@ -1,6 +1,7 @@
 import { Component, signal, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
+import { environment } from '../../../environments/environment';
 
 interface HeroSlide {
   tag: string;
@@ -77,7 +78,7 @@ interface HeroSlide {
                       </svg>
                     </a>
                     <a
-                      href="https://wa.me/919876543210?text=Hi! I want to explore your collection."
+                      [href]="'https://wa.me/' + waPhone + '?text=Hi! I want to explore your collection.'"
                       target="_blank"
                       rel="noopener noreferrer"
                       class="btn btn-whatsapp text-sm px-5 py-3 sm:text-base sm:px-8 sm:py-3.5"
@@ -152,6 +153,7 @@ interface HeroSlide {
   `,
 })
 export class HeroComponent implements OnInit, OnDestroy {
+  readonly waPhone = environment.whatsappPhone;
   currentSlide = signal(0);
   private intervalId?: ReturnType<typeof setInterval>;
 

@@ -2,6 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SanityService } from '../../core/services/sanity.service';
 import { Testimonial } from '../../core/models/testimonial.model';
+import { environment } from '../../../environments/environment';
 
 const DEMO_TESTIMONIALS: Testimonial[] = [
   {
@@ -171,7 +172,7 @@ const DEMO_TESTIMONIALS: Testimonial[] = [
         <div class="text-center mt-14">
           <p class="text-text-muted mb-4">Join thousands of happy customers</p>
           <a
-            href="https://wa.me/919876543210?text=Hi! I want to place my first order."
+            [href]="'https://wa.me/' + waPhone + '?text=Hi! I want to place my first order.'"
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-whatsapp px-10 py-3.5 text-base"
@@ -187,6 +188,7 @@ const DEMO_TESTIMONIALS: Testimonial[] = [
   `,
 })
 export class TestimonialsComponent implements OnInit {
+  readonly waPhone = environment.whatsappPhone;
   private sanity = inject(SanityService);
   testimonials = signal<Testimonial[]>(DEMO_TESTIMONIALS);
 
