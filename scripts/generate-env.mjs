@@ -85,6 +85,12 @@ export const environment = {
 // ── Write files ───────────────────────────────────────────────────────────────
 const envDir = path.join(root, 'src', 'environments');
 
+// Create the directory if it doesn't exist (e.g. on a fresh CI clone)
+if (!fs.existsSync(envDir)) {
+  fs.mkdirSync(envDir, { recursive: true });
+  console.log('✓  Created src/environments/');
+}
+
 fs.writeFileSync(path.join(envDir, 'environment.ts'), makeEnvFile(false));
 console.log('✓  Wrote src/environments/environment.ts');
 
