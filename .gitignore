@@ -28,6 +28,15 @@ yarn-error.log
 .sass-cache/
 /connect.lock
 /coverage
+
+# Environment files — auto-generated from .env.local, contain real API tokens.
+# ⚠️  NEVER commit files with real tokens.
+src/environments/environment.ts
+src/environments/environment.prod.ts
+
+# Local secrets — NEVER commit this
+.env.local
+.env
 /libpeerconnection.log
 testem.log
 /typings
