@@ -20,21 +20,31 @@ import { WhatsAppService } from '../../core/services/whatsapp.service';
     >
       <!-- Image container -->
       <div class="relative overflow-hidden aspect-[3/4] bg-surface-2">
-        <img
-          [src]="product.images[0]?.url"
-          [alt]="product.images[0]?.alt || product.name"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-107"
-          loading="lazy"
-          decoding="async"
-          width="400"
-          height="533"
-        />
+        @if (product.images?.[0]?.url) {
+          <img
+            [src]="product.images![0].thumbUrl || product.images![0].url"
+            [alt]="product.images![0].alt || product.name"
+            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-107"
+            loading="lazy"
+            decoding="async"
+            width="400"
+            height="533"
+          />
+        } @else {
+          <div class="w-full h-full flex items-center justify-center bg-gray-100">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+        }
 
         <!-- Second image on hover (desktop) -->
-        @if (product.images[1]) {
+        @if (product.images?.[1]) {
           <img
-            [src]="product.images[1].url"
-            [alt]="product.images[1].alt || product.name"
+            [src]="product.images![1].url"
+            [alt]="product.images![1].alt || product.name"
             class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100
               transition-opacity duration-500"
             loading="lazy"
@@ -220,7 +230,7 @@ export class ProductCardComponent {
     this.cartService.addItem({
       productId: this.product.id,
       name: this.product.name,
-      image: this.product.images[0]?.url ?? '',
+      image: this.product.images?.[0]?.url ?? '',
       price: this.product.price,
       originalPrice: this.product.originalPrice,
       quantity: 1,

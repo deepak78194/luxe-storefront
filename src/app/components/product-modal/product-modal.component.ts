@@ -99,9 +99,9 @@ import { Product } from '../../core/models/product.model';
                 </button>
 
                 <!-- Thumbnail strip -->
-                @if (p.images.length > 1) {
+                @if ((p.images?.length ?? 0) > 1) {
                   <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 px-4">
-                    @for (img of p.images; track i; let i = $index) {
+                    @for (img of (p.images ?? []); track i; let i = $index) {
                       <button
                         class="w-12 h-12 rounded-lg overflow-hidden border-2 transition-all"
                         [class.border-primary]="selectedImageIndex() === i"
@@ -312,7 +312,7 @@ export class ProductModalComponent {
   selectedImage = computed(() => {
     const p = this.product();
     if (!p) return '';
-    return p.images[this.selectedImageIndex()]?.url ?? p.images[0]?.url ?? '';
+    return p.images?.[this.selectedImageIndex()]?.url ?? p.images?.[0]?.url ?? '';
   });
 
   isWishlisted = computed(() => {
@@ -357,7 +357,7 @@ export class ProductModalComponent {
     this.cart.addItem({
       productId: p.id,
       name: p.name,
-      image: p.images[0]?.url ?? '',
+      image: p.images?.[0]?.url ?? '',
       price: p.price,
       originalPrice: p.originalPrice,
       quantity: this.quantity(),

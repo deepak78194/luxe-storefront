@@ -1,5 +1,6 @@
 export interface ProductImage {
   url: string;
+  thumbUrl?: string;   // 400px CDN variant — used in product cards
   alt: string;
   width?: number;
   height?: number;
@@ -20,7 +21,7 @@ export interface Product {
   brand?: string;
   description: string;
   shortDescription?: string;
-  images: ProductImage[];
+  images: ProductImage[] | null;
   category: string;
   categorySlug: string;
   tags: string[];

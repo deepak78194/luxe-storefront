@@ -10,9 +10,9 @@ export default defineConfig({
   name: 'luxe-storefront',
   title: 'Luxe Storefront',
 
-  // Replace with your actual Sanity project ID
+  // TODO: paste your Project ID from sanity.io/manage
   projectId: 'YOUR_SANITY_PROJECT_ID',
-  dataset: 'production',
+  dataset: 'pdc1c',
 
   plugins: [structureTool(), visionTool()],
 

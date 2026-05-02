@@ -12,7 +12,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "sanity": "cd sanity-studio && sanity dev",
-    "sanity:deploy": "cd sanity-studio && sanity deploy"
+    "sanity:deploy": "cd sanity-studio && sanity deploy",
+    "generate-env": "node scripts/generate-env.mjs",
+    "prebuild": "node scripts/generate-env.mjs",
+    "seed": "node scripts/seed.mjs",
+    "seed:images": "node scripts/seed-images.mjs"
   },
   "private": true,
   "dependencies": {
