@@ -15,6 +15,7 @@
     "sanity:deploy": "cd sanity-studio && sanity deploy",
     "generate-env": "node scripts/generate-env.mjs",
     "prebuild": "node scripts/generate-env.mjs",
+    "prebuild:prod": "node scripts/generate-env.mjs",
     "seed": "node scripts/seed.mjs",
     "seed:images": "node scripts/seed-images.mjs"
   },
