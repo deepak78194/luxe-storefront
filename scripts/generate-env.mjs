@@ -37,6 +37,10 @@ if (fs.existsSync(envLocalPath)) {
 }
 
 // ── Read values (fall back to safe placeholder if missing) ───────────────────
+// Debug: print which expected keys are present (values hidden for security)
+const expectedKeys = ['SANITY_PROJECT_ID','SANITY_DATASET','SANITY_READ_TOKEN','SANITY_WRITE_TOKEN','WHATSAPP_PHONE','STORE_NAME','STORE_TAGLINE','ADMIN_PASSWORD','NODE_VERSION'];
+console.log('ENV CHECK:', expectedKeys.map(k => `${k}=${process.env[k] ? '✓' : '✗'}`).join(' '));
+
 const required = ['SANITY_PROJECT_ID', 'SANITY_WRITE_TOKEN'];
 const missing = required.filter((k) => !process.env[k] || process.env[k].startsWith('YOUR_'));
 if (missing.length) {
