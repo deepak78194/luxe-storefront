@@ -52,15 +52,11 @@ const cfg = {
   sanityProjectId:  process.env['SANITY_PROJECT_ID']  || 'YOUR_PROJECT_ID',
   sanityDataset:    process.env['SANITY_DATASET']     || 'production',
   sanityApiVersion: '2024-01-01',
-  // Use a dedicated read-only token for the browser if provided, otherwise
-  // fall back to the write token (less secure but works for single-token setups).
-  sanityToken:      process.env['SANITY_READ_TOKEN']  ||
-                    process.env['SANITY_WRITE_TOKEN']  || '',
-  sanityWriteToken: process.env['SANITY_WRITE_TOKEN'] || '',
   whatsappPhone:    process.env['WHATSAPP_PHONE']     || '919876543210',
   storeName:        process.env['STORE_NAME']         || 'Luxe Storefront',
   storeTagline:     process.env['STORE_TAGLINE']      || 'Curated Fashion & Accessories',
-  adminPassword:    process.env['ADMIN_PASSWORD']     || 'admin@luxe2026',
+  // NOTE: sanityToken, sanityWriteToken, and adminPassword are intentionally
+  // NOT included here — they are CF Pages secrets stored server-side only.
 };
 
 // ── Template helper ──────────────────────────────────────────────────────────
@@ -72,16 +68,9 @@ export const environment = {
   sanityProjectId:  '${cfg.sanityProjectId}',
   sanityDataset:    '${cfg.sanityDataset}',
   sanityApiVersion: '${cfg.sanityApiVersion}',
-  // Read-only token used by the public storefront (Viewer role)
-  sanityToken:      '${cfg.sanityToken}',
-  // Editor token used by the admin panel (Editor role)
-  // ⚠️  This is in the browser bundle. For full security, proxy admin writes
-  //     through a Cloudflare Pages Function so this token stays server-side.
-  sanityWriteToken: '${cfg.sanityWriteToken}',
   whatsappPhone:    '${cfg.whatsappPhone}',
   storeName:        '${cfg.storeName}',
   storeTagline:     '${cfg.storeTagline}',
-  adminPassword:    '${cfg.adminPassword}',
 };
 `;
 }

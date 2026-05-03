@@ -2,7 +2,6 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-admin-login',
@@ -64,20 +63,27 @@ export class AdminLoginComponent {
   loading  = signal(false);
   error    = signal(false);
 
-  login(): void {
+  async login(): Promise<void> {
     this.loading.set(true);
     this.error.set(false);
-
-    // Small delay to prevent brute-force timing attacks
-    setTimeout(() => {
-      if (this.password === environment.adminPassword) {
-        sessionStorage.setItem('admin-auth', 'true');
+    try {
+      const resp = await fetch('/api/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: this.password }),
+      });
+      const data = await resp.json();
+      if (resp.ok && data.ok) {
+        sessionStorage.setItem('admin-session-token', data.token);
         this.router.navigate(['/admin/dashboard']);
       } else {
         this.error.set(true);
         this.password = '';
       }
+    } catch {
+      this.error.set(true);
+    } finally {
       this.loading.set(false);
-    }, 400);
+    }
   }
 }

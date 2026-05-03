@@ -16,9 +16,7 @@ export class SanityService {
     // Only initialise if a real project ID and token have been set
     this.isConfigured =
       !!environment.sanityProjectId &&
-      environment.sanityProjectId !== 'YOUR_PROJECT_ID' &&
-      !!environment.sanityToken &&
-      !environment.sanityToken.startsWith('YOUR_');
+      environment.sanityProjectId !== 'YOUR_PROJECT_ID';
 
     if (this.isConfigured) {
       this.client = createClient({
@@ -26,8 +24,8 @@ export class SanityService {
         dataset: environment.sanityDataset,
         apiVersion: environment.sanityApiVersion,
         useCdn: environment.production,
-        // Required for private datasets — Viewer token from sanity.io/manage → API → Tokens
-        token: environment.sanityToken,
+        // No token — the dataset must be set to "public" in sanity.io/manage → Datasets.
+        // A token here would be visible in every browser network request.
       });
       this.builder = imageUrlBuilder(this.client);
     }

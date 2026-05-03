@@ -9,8 +9,15 @@ export const adminGuard: CanActivateFn = () => {
 
   if (!isPlatformBrowser(platformId)) return true; // allow SSR to pass through
 
-  const authenticated = sessionStorage.getItem('admin-auth') === 'true';
-  if (authenticated) return true;
+  // Session token is issued by /api/admin-login (CF Pages Function).
+  // Client-side we only check expiry; HMAC integrity is verified server-side on each write.
+  const token = sessionStorage.getItem('admin-session-token') ?? '';
+  if (token) {
+    const dotIdx = token.indexOf('.');
+    if (dotIdx !== -1 && Date.now() < Number(token.slice(0, dotIdx))) {
+      return true;
+    }
+  }
 
   router.navigate(['/admin/login']);
   return false;
