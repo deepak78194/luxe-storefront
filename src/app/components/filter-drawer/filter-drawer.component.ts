@@ -14,7 +14,7 @@ import { UiStateService } from '../../core/services/ui-state.service';
     <!-- Mobile overlay -->
     @if (!inline && drawerOpen()) {
       <div
-        class="overlay md:hidden"
+        class="overlay lg:hidden"
         (click)="uiState.closeFilterDrawer()"
         aria-hidden="true"
       ></div>
@@ -34,7 +34,7 @@ import { UiStateService } from '../../core/services/ui-state.service';
       [class.duration-350]="!inline"
       [class.-translate-x-full]="!inline && !drawerOpen()"
       [class.translate-x-0]="!inline && drawerOpen()"
-      [class.md:hidden]="!inline"
+      [class.lg:hidden]="!inline"
       [class.overflow-y-auto]="!inline"
       [attr.aria-hidden]="!inline && !drawerOpen()"
       role="dialog"

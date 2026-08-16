@@ -76,7 +76,7 @@ import { CategoryStatus } from '../../core/models/category.model';
           <div class="flex items-center gap-3">
             <!-- Filter button (opens drawer on mobile, shows sidebar on desktop) -->
             <button
-              class="btn btn-secondary text-sm py-2 px-4 md:hidden"
+              class="btn btn-secondary text-sm py-2 px-4 lg:hidden"
               (click)="uiState.openFilterDrawer()"
               aria-label="Open filters"
             >
