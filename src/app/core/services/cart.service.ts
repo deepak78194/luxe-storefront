@@ -3,7 +3,7 @@ import { CartItem, CartState } from '../models/cart.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private readonly STORAGE_KEY = 'luxe_cart';
+  private readonly STORAGE_KEY = 'wc_cart';
 
   private _state = signal<CartState>({
     items: this.loadFromStorage(),

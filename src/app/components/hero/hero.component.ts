@@ -2,6 +2,13 @@ import { Component, signal, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
 import { environment } from '../../../environments/environment';
+import { STOREFRONT_CATEGORY_ALLOWLIST } from '../../core/config/storefront-categories.config';
+
+const CATEGORY_EMOJI: Record<string, string> = {
+  beddings: '🛏️',
+  'kids-clothing': '🧸',
+  'womens-fashion': '👗',
+};
 
 interface HeroSlide {
   tag: string;
@@ -160,43 +167,44 @@ export class HeroComponent implements OnInit, OnDestroy {
   readonly slides: HeroSlide[] = [
     {
       tag: 'New Collection 2026',
-      heading: 'Effortless Luxury,\nEvery Day',
-      subheading: 'Discover curated fashion pieces crafted with intention. Premium materials, timeless aesthetics.',
+      heading: 'Warmth & Comfort,\nEvery Day',
+      subheading: 'Discover pure cotton home textiles crafted with care. Soft materials, everyday comfort.',
       cta: 'Explore Collection',
       ctaHref: '#catalog',
       imageUrl: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&q=80',
-      imageAlt: 'Model wearing luxury fashion',
-      accentColor: '#0F766E',
+      imageAlt: 'Cozy home textiles',
+      accentColor: '#3D5C3A',
     },
     {
-      tag: 'Bags & Accessories',
-      heading: 'Carry Confidence\nEverywhere',
-      subheading: 'From structured totes to sleek crossbodies — bags that complete every look.',
-      cta: 'Shop Bags',
+      tag: 'Bedding & Home Textiles',
+      heading: 'Comfort That\nWraps You In',
+      subheading: 'From soft bedsheets to cozy comforters — pure cotton pieces for every home.',
+      cta: 'Shop Bedding',
       ctaHref: '#catalog',
       imageUrl: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=1600&q=80',
-      imageAlt: 'Luxury bags collection',
-      accentColor: '#F59E0B',
+      imageAlt: 'Bedding collection',
+      accentColor: '#8A9A5B',
     },
     {
       tag: 'Best Sellers',
       heading: 'Loved by\nThousands',
-      subheading: 'Our most-adored pieces — tried, trusted and beautifully crafted for the modern woman.',
+      subheading: 'Our most-loved pieces — trusted by families, crafted with pure cotton comfort.',
       cta: 'See Best Sellers',
       ctaHref: '#catalog',
       imageUrl: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600&q=80',
-      imageAlt: 'Fashion show',
-      accentColor: '#0F766E',
+      imageAlt: 'Happy customers at home',
+      accentColor: '#3D5C3A',
     },
   ];
 
   readonly categoryHighlights = [
     { label: 'New Arrivals', emoji: '✨', href: '#catalog' },
-    { label: 'Bags',         emoji: '👜', href: '#catalog' },
-    { label: 'Clothing',     emoji: '👗', href: '#catalog' },
-    { label: 'Accessories',  emoji: '💍', href: '#catalog' },
-    { label: 'Shoes',        emoji: '👠', href: '#catalog' },
-    { label: 'Sale',         emoji: '🏷️', href: '#catalog' },
+    ...STOREFRONT_CATEGORY_ALLOWLIST.map((c) => ({
+      label: c.displayName,
+      emoji: CATEGORY_EMOJI[c.matchSlug] ?? '🏷️',
+      href: '#catalog',
+    })),
+    { label: 'Sale', emoji: '🏷️', href: '#catalog' },
   ];
 
   ngOnInit(): void {

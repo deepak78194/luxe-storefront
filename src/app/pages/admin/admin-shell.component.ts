@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
             </svg>
           </div>
-          <span class="font-bold text-gray-900 text-sm">Luxe Admin</span>
+          <span class="font-bold text-gray-900 text-sm">W&C Admin</span>
         </div>
         <button (click)="sidebarOpen.set(!sidebarOpen())" class="p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Toggle menu">
           @if (sidebarOpen()) {
@@ -49,7 +49,7 @@ import { CommonModule } from '@angular/common';
         <div class="px-6 py-5 border-b border-gray-200 flex items-center justify-between">
           <div>
             <p class="text-xs font-semibold text-indigo-500 uppercase tracking-widest mb-0.5">Admin Panel</p>
-            <h1 class="text-lg font-bold text-gray-800 leading-tight">Luxe Storefront</h1>
+            <h1 class="text-lg font-bold text-gray-800 leading-tight">Warm & Cozy</h1>
           </div>
           <button (click)="sidebarOpen.set(false)" class="lg:hidden p-1 rounded-lg hover:bg-gray-100 transition-colors">
             <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

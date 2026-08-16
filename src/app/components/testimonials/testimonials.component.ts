@@ -30,7 +30,7 @@ const DEMO_TESTIMONIALS: Testimonial[] = [
     date: 'January 2026',
   },
   {
-    id: '4', name: 'Sneha Reddy', handle: '@snehafashion',
+    id: '4', name: 'Sneha Reddy', handle: '@sneha.reddy',
     avatar: 'https://i.pravatar.cc/80?img=4',
     rating: 4, verified: true,
     text: 'The Linen Blazer is my go-to for work. Super versatile and the camel color goes with literally everything. Packaging was beautiful too — felt like a gift.',
@@ -38,7 +38,7 @@ const DEMO_TESTIMONIALS: Testimonial[] = [
     date: 'April 2026',
   },
   {
-    id: '5', name: 'Meera Nair', handle: '@meera.luxe',
+    id: '5', name: 'Meera Nair', handle: '@meera.nair',
     avatar: 'https://i.pravatar.cc/80?img=5',
     rating: 5, verified: true,
     text: 'The Silk Scarf is stunning — the print quality is amazing and the material is so smooth. Ordered via WhatsApp and received delivery the next day. 10/10!',

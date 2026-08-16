@@ -255,17 +255,17 @@ export class ContactComponent {
     },
     {
       type: 'Email',
-      label: 'hello@luxestorefront.com',
+      label: 'hello@warmandcozyhomedecors.com',
       emoji: '✉️',
-      bgColor: 'rgba(15,118,110,0.1)',
-      href: 'mailto:hello@luxestorefront.com',
+      bgColor: 'rgba(61,92,58,0.1)',
+      href: 'mailto:hello@warmandcozyhomedecors.com',
     },
     {
       type: 'Instagram',
-      label: '@luxe.storefront',
+      label: '@warmandcozyhomedecors',
       emoji: '📸',
-      bgColor: 'rgba(245,158,11,0.1)',
-      href: 'https://instagram.com',
+      bgColor: 'rgba(138,154,91,0.12)',
+      href: 'https://www.instagram.com/warmandcozyhomedecors',
     },
   ];
 

@@ -1,3 +1,5 @@
+export type CategoryStatus = 'active' | 'launching-soon';
+
 export interface Category {
   id: string;
   slug: string;
@@ -8,4 +10,7 @@ export interface Category {
   count?: number;
   featured?: boolean;
   order?: number;
+  status?: CategoryStatus;
+  isVirtual?: boolean;
+  teaserNote?: string;
 }

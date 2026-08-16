@@ -4,6 +4,7 @@ import { ProductService } from '../../core/services/product.service';
 import { UiStateService } from '../../core/services/ui-state.service';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { FilterDrawerComponent } from '../filter-drawer/filter-drawer.component';
+import { CategoryStatus } from '../../core/models/category.model';
 
 @Component({
   selector: 'app-product-catalog',
@@ -32,26 +33,40 @@ import { FilterDrawerComponent } from '../filter-drawer/filter-drawer.component'
         <!-- Category pill tabs -->
         <div class="flex overflow-x-auto scrollbar-hide gap-2 mb-8 pb-1" role="tablist">
           @for (cat of categoryTabs(); track cat.slug) {
-            <button
-              class="flex-none px-5 py-2 rounded-full text-sm font-medium transition-all duration-200
-                whitespace-nowrap border"
-              [class.bg-primary]="activeCategory() === cat.slug"
-              [class.text-white]="activeCategory() === cat.slug"
-              [class.border-primary]="activeCategory() === cat.slug"
-              [class.bg-white]="activeCategory() !== cat.slug"
-              [class.text-text-muted]="activeCategory() !== cat.slug"
-              [class.border-border]="activeCategory() !== cat.slug"
-              [class.hover:border-primary]="activeCategory() !== cat.slug"
-              [class.hover:text-primary]="activeCategory() !== cat.slug"
-              (click)="selectCategory(cat.slug)"
-              role="tab"
-              [attr.aria-selected]="activeCategory() === cat.slug"
-            >
-              {{ cat.name }}
-              @if (cat.count) {
-                <span class="ml-1.5 text-xs opacity-70">({{ cat.count }})</span>
-              }
-            </button>
+            @if (cat.status === 'launching-soon') {
+              <button
+                class="flex-none px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap border
+                  bg-surface-2 text-text-muted border-border opacity-70 cursor-not-allowed"
+                disabled
+                role="tab"
+                aria-disabled="true"
+                [attr.title]="cat.teaserNote || 'Launching soon'"
+              >
+                {{ cat.name }}
+                <span class="ml-1.5 text-xs">(Soon)</span>
+              </button>
+            } @else {
+              <button
+                class="flex-none px-5 py-2 rounded-full text-sm font-medium transition-all duration-200
+                  whitespace-nowrap border"
+                [class.bg-primary]="activeCategory() === cat.slug"
+                [class.text-white]="activeCategory() === cat.slug"
+                [class.border-primary]="activeCategory() === cat.slug"
+                [class.bg-white]="activeCategory() !== cat.slug"
+                [class.text-text-muted]="activeCategory() !== cat.slug"
+                [class.border-border]="activeCategory() !== cat.slug"
+                [class.hover:border-primary]="activeCategory() !== cat.slug"
+                [class.hover:text-primary]="activeCategory() !== cat.slug"
+                (click)="selectCategory(cat.slug)"
+                role="tab"
+                [attr.aria-selected]="activeCategory() === cat.slug"
+              >
+                {{ cat.name }}
+                @if (cat.count) {
+                  <span class="ml-1.5 text-xs opacity-70">({{ cat.count }})</span>
+                }
+              </button>
+            }
           }
         </div>
 
@@ -241,19 +256,25 @@ export class ProductCatalogComponent {
   activeCategory = computed(() => this.productService.filter().category);
 
   categoryTabs = computed(() => {
-    const products = this.productService.products();
+    const visible = this.productService.visibleProducts();
     const counts: Record<string, number> = {};
-    products.forEach((p) => {
+    visible.forEach((p) => {
       counts[p.categorySlug] = (counts[p.categorySlug] ?? 0) + 1;
     });
 
-    const tabs = [{ slug: 'all', name: 'All', count: products.length }];
+    const tabs: { slug: string; name: string; count: number; status: CategoryStatus; teaserNote?: string }[] = [
+      { slug: 'all', name: 'All', count: visible.length, status: 'active' },
+    ];
     const cats = this.productService.categories();
-    cats
-      .filter((c) => c.slug !== 'all')
-      .forEach((c) => {
-        tabs.push({ slug: c.slug, name: c.name, count: counts[c.slug] ?? 0 });
+    cats.forEach((c) => {
+      tabs.push({
+        slug: c.slug,
+        name: c.name,
+        count: counts[c.slug] ?? 0,
+        status: c.status ?? 'active',
+        teaserNote: c.teaserNote,
       });
+    });
     return tabs;
   });
 

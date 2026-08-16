@@ -7,6 +7,7 @@ import { CartService } from '../../core/services/cart.service';
 import { WishlistService } from '../../core/services/wishlist.service';
 import { UiStateService } from '../../core/services/ui-state.service';
 import { ProductService } from '../../core/services/product.service';
+import { STOREFRONT_CATEGORY_ALLOWLIST } from '../../core/config/storefront-categories.config';
 
 @Component({
   selector: 'app-navbar',
@@ -29,14 +30,10 @@ import { ProductService } from '../../core/services/product.service';
         <nav class="flex items-center justify-between h-16 md:h-20" aria-label="Main navigation">
 
           <!-- Logo -->
-          <a href="#" class="flex items-center gap-2 group" aria-label="Luxe Storefront home">
-            <div class="w-8 h-8 rounded-full bg-gradient-luxury flex items-center justify-center
-              shadow-md group-hover:shadow-lg transition-shadow">
-              <span class="text-white font-bold text-sm font-heading">L</span>
-            </div>
-            <span class="font-heading font-bold text-xl tracking-tight text-text
-              group-hover:text-primary transition-colors">
-              Luxe
+          <a href="#" class="flex items-center gap-2 group" aria-label="Warm & Cozy Home Decors home">
+            <span class="font-heading font-bold text-xl md:text-2xl tracking-tight text-primary
+              group-hover:text-primary-dark transition-colors">
+              Warm &amp; Cozy
             </span>
           </a>
 
@@ -247,9 +244,7 @@ export class NavbarComponent implements OnInit {
 
   readonly navLinks = [
     { label: 'New Arrivals', href: '#catalog' },
-    { label: 'Bags',         href: '#catalog'  },
-    { label: 'Clothing',     href: '#catalog'  },
-    { label: 'Accessories',  href: '#catalog'  },
+    ...STOREFRONT_CATEGORY_ALLOWLIST.map((c) => ({ label: c.displayName, href: '#catalog' })),
     { label: 'About',        href: '#about'    },
     { label: 'Contact',      href: '#contact'  },
   ];

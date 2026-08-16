@@ -6,7 +6,7 @@ export const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./pages/home/home.component').then((m) => m.HomePageComponent),
-    title: 'Luxe Storefront — Premium Fashion & Accessories',
+    title: 'Warm & Cozy Home Decors — Home Textiles & Cotton Wear',
   },
 
   // ── Admin login (public) ─────────────────────────────────────────────────
@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: 'admin/login',
     loadComponent: () =>
       import('./pages/admin/login/admin-login.component').then((m) => m.AdminLoginComponent),
-    title: 'Admin Login — Luxe Storefront',
+    title: 'Admin Login — Warm & Cozy',
   },
 
   // ── Admin shell (protected) ──────────────────────────────────────────────
@@ -29,31 +29,31 @@ export const routes: Routes = [
         path: 'dashboard',
         loadComponent: () =>
           import('./pages/admin/dashboard/admin-dashboard.component').then((m) => m.AdminDashboardComponent),
-        title: 'Dashboard — Luxe Admin',
+        title: 'Dashboard — W&C Admin',
       },
       {
         path: 'products',
         loadComponent: () =>
           import('./pages/admin/products/admin-products.component').then((m) => m.AdminProductsComponent),
-        title: 'Products — Luxe Admin',
+        title: 'Products — W&C Admin',
       },
       {
         path: 'products/new',
         loadComponent: () =>
           import('./pages/admin/add-product/admin-add-product.component').then((m) => m.AdminAddProductComponent),
-        title: 'Add Product — Luxe Admin',
+        title: 'Add Product — W&C Admin',
       },
       {
         path: 'products/:id/edit',
         loadComponent: () =>
           import('./pages/admin/edit-product/admin-edit-product.component').then((m) => m.AdminEditProductComponent),
-        title: 'Edit Product — Luxe Admin',
+        title: 'Edit Product — W&C Admin',
       },
       {
         path: 'categories',
         loadComponent: () =>
           import('./pages/admin/categories/admin-categories.component').then((m) => m.AdminCategoriesComponent),
-        title: 'Categories — Luxe Admin',
+        title: 'Categories — W&C Admin',
       },
     ],
   },

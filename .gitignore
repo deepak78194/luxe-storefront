@@ -37,6 +37,10 @@ src/environments/environment.prod.ts
 # Local secrets — NEVER commit this
 .env.local
 .env
+
+# Cloudflare deploy token (wrangler CLI) — NEVER commit this
+.cloudflare.env
+.new-project-secrets.env
 /libpeerconnection.log
 testem.log
 /typings

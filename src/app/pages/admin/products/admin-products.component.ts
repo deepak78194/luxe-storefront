@@ -89,7 +89,7 @@ import { SanityWriteService } from '../../../core/services/sanity-write.service'
                 @if (p.isFeatured || p.isNewArrival || p.isBestseller) {
                   <div class="flex flex-wrap gap-1 mt-2">
                     @if (p.isFeatured)   { <span class="bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded text-xs">★ Featured</span> }
-                    @if (p.isNewArrival) { <span class="bg-teal-100 text-teal-700 px-1.5 py-0.5 rounded text-xs">New</span> }
+                    @if (p.isNewArrival) { <span class="bg-primary/10 text-primary px-1.5 py-0.5 rounded text-xs">New</span> }
                     @if (p.isBestseller) { <span class="bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded text-xs">Best Seller</span> }
                   </div>
                 }
@@ -145,7 +145,7 @@ import { SanityWriteService } from '../../../core/services/sanity-write.service'
                   <td class="px-4 py-4 text-center">
                     <div class="flex items-center justify-center gap-1 flex-wrap">
                       @if (p.isFeatured)   { <span class="bg-indigo-100 text-indigo-700 px-1.5 py-0.5 rounded text-xs">★ Featured</span> }
-                      @if (p.isNewArrival) { <span class="bg-teal-100 text-teal-700 px-1.5 py-0.5 rounded text-xs">New</span> }
+                      @if (p.isNewArrival) { <span class="bg-primary/10 text-primary px-1.5 py-0.5 rounded text-xs">New</span> }
                       @if (p.isBestseller) { <span class="bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded text-xs">Best Seller</span> }
                     </div>
                   </td>

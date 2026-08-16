@@ -3,7 +3,7 @@ import { Product } from '../models/product.model';
 
 @Injectable({ providedIn: 'root' })
 export class WishlistService {
-  private readonly STORAGE_KEY = 'luxe_wishlist';
+  private readonly STORAGE_KEY = 'wc_wishlist';
 
   private _ids = signal<Set<string>>(new Set(this.loadFromStorage()));
 

@@ -2,6 +2,7 @@ import { Injectable, inject, signal, computed } from '@angular/core';
 import { SanityService } from './sanity.service';
 import { Product, FilterState } from '../models/product.model';
 import { Category } from '../models/category.model';
+import { buildStorefrontCategories } from '../config/storefront-categories.config';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
@@ -29,9 +30,20 @@ export class ProductService {
   readonly error = this._error.asReadonly();
   readonly filter = this._filter.asReadonly();
 
+  /** Slugs of categories the storefront is currently allowed to sell from (excludes launching-soon). */
+  readonly storefrontActiveSlugs = computed(
+    () => new Set(this._categories().filter((c) => c.status === 'active').map((c) => c.slug))
+  );
+
+  /** All products, restricted to categories the storefront allowlist marks active. */
+  readonly visibleProducts = computed(() => {
+    const activeSlugs = this.storefrontActiveSlugs();
+    return this._products().filter((p) => activeSlugs.has(p.categorySlug));
+  });
+
   readonly filteredProducts = computed(() => {
     const f = this._filter();
-    let list = this._products();
+    let list = this.visibleProducts();
 
     if (f.category && f.category !== 'all') {
       list = list.filter((p) => p.categorySlug === f.category);
@@ -67,11 +79,11 @@ export class ProductService {
   });
 
   readonly featuredProducts = computed(() =>
-    this._products().filter((p) => p.isFeatured).slice(0, 8)
+    this.visibleProducts().filter((p) => p.isFeatured).slice(0, 8)
   );
 
   readonly newArrivals = computed(() =>
-    this._products().filter((p) => p.isNewArrival).slice(0, 8)
+    this.visibleProducts().filter((p) => p.isNewArrival).slice(0, 8)
   );
 
   updateFilter(partial: Partial<FilterState>): void {
@@ -112,13 +124,13 @@ export class ProductService {
   async loadCategories(): Promise<void> {
     try {
       if (!this.sanity.isConfigured) {
-        this._categories.set(DEMO_CATEGORIES);
+        this._categories.set(buildStorefrontCategories(DEMO_CATEGORIES));
         return;
       }
       const categories = await this.sanity.fetchCategories();
-      this._categories.set(categories.length ? categories : DEMO_CATEGORIES);
+      this._categories.set(buildStorefrontCategories(categories.length ? categories : DEMO_CATEGORIES));
     } catch {
-      this._categories.set(DEMO_CATEGORIES);
+      this._categories.set(buildStorefrontCategories(DEMO_CATEGORIES));
     }
   }
 
@@ -127,7 +139,7 @@ export class ProductService {
   }
 
   getRelatedProducts(product: Product, limit = 4): Product[] {
-    return this._products()
+    return this.visibleProducts()
       .filter((p) => p.id !== product.id && p.categorySlug === product.categorySlug)
       .slice(0, limit);
   }

@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
             </svg>
           </div>
           <h1 class="text-2xl font-bold text-gray-900">Admin Login</h1>
-          <p class="text-gray-500 text-sm mt-1">Luxe Storefront Management</p>
+          <p class="text-gray-500 text-sm mt-1">Warm & Cozy Management</p>
         </div>
 
         <form (ngSubmit)="login()" class="space-y-5">

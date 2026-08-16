@@ -17,13 +17,13 @@ import { CommonModule } from '@angular/common';
             <div class="relative z-10 rounded-2xl overflow-hidden shadow-card-hover aspect-[4/5] w-4/5">
               <img
                 src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&q=80"
-                alt="Luxe brand story"
+                alt="Warm & Cozy Home Decors — our story"
                 class="w-full h-full object-cover"
                 loading="lazy" decoding="async"
               />
               <!-- Overlay text -->
               <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-text/60 to-transparent">
-                <p class="text-white font-heading text-lg italic">"Wear your confidence."</p>
+                <p class="text-white font-heading text-lg italic">"Wrapped in warmth and comfort."</p>
               </div>
             </div>
 
@@ -57,19 +57,19 @@ import { CommonModule } from '@angular/common';
 
             <div class="space-y-5 text-text-muted leading-relaxed">
               <p>
-                Luxe was born from a simple belief: that exceptional quality and
-                thoughtful design should be accessible to everyone. We partner
-                directly with artisan workshops across India to bring you pieces
-                that stand the test of time.
+                Warm &amp; Cozy was born from a simple belief: that quality home
+                textiles and everyday comfort should be accessible to everyone.
+                We work directly with skilled artisans across India to bring you
+                pure cotton pieces made to last.
               </p>
               <p>
-                Every stitch, every leather panel, every fabric choice is made
-                with intention. We use only ethically sourced materials and
-                support fair wages for every craftsperson in our supply chain.
+                Every stitch and every fabric choice is made with intention.
+                We use only pure, ethically sourced cotton and support fair
+                wages for every craftsperson in our supply chain.
               </p>
               <p>
-                From our first tote to our hundredth — each Luxe piece carries
-                the same promise: beauty that lasts, values that matter.
+                From our first bedsheet to our thousandth — each Warm &amp; Cozy
+                piece carries the same promise: comfort that lasts, values that matter.
               </p>
             </div>
 
@@ -115,7 +115,7 @@ export class AboutComponent {
     {
       emoji: '♻️',
       title: 'Sustainable Materials',
-      description: 'Ethically sourced leathers, organic cottons and recycled packaging.',
+      description: 'Ethically sourced organic cottons and recycled packaging.',
     },
     {
       emoji: '🤝',

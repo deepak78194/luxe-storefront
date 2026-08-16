@@ -1,18 +1,10 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../core/services/product.service';
 import { UiStateService } from '../../core/services/ui-state.service';
 import { environment } from '../../../environments/environment';
 
-interface CollectionCard {
-  title: string;
-  subtitle: string;
-  imageUrl: string;
-  imageAlt: string;
-  href: string;
-  categorySlug: string;
-  badge?: string;
-}
+const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=900&q=80';
 
 @Component({
   selector: 'app-featured-collections',
@@ -38,129 +30,62 @@ interface CollectionCard {
           </p>
         </div>
 
-        <!-- Bento grid -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px]
-          md:auto-rows-[220px] lg:auto-rows-[240px]">
-
-          <!-- Feature card — spans 2 cols & 2 rows -->
-          <a
-            href="#catalog"
-            class="col-span-2 row-span-2 card group relative overflow-hidden cursor-pointer
-              focus-visible:ring-2 focus-visible:ring-primary"
-            (click)="filterByCategory('bags')"
-            aria-label="Shop Bags Collection"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=900&q=80"
-              alt="Bags collection"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-text/70 via-text/20 to-transparent"></div>
-            <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
-              <span class="badge badge-new mb-2">New Season</span>
-              <h3 class="font-heading text-2xl md:text-3xl font-bold text-white mb-1">Bags</h3>
-              <p class="text-white/80 text-sm mb-3 opacity-0 group-hover:opacity-100
-                transition-opacity duration-300">
-                From structured totes to effortless crossbodies
-              </p>
-              <span class="inline-flex items-center gap-2 text-white/90 text-sm font-semibold
-                group-hover:text-accent transition-colors">
-                Shop now
-                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </span>
-            </div>
-          </a>
-
-          <!-- Clothing -->
-          <a
-            href="#catalog"
-            class="card group relative overflow-hidden cursor-pointer
-              focus-visible:ring-2 focus-visible:ring-primary"
-            (click)="filterByCategory('clothing')"
-            aria-label="Shop Clothing"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&q=80"
-              alt="Clothing collection"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy" decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-text/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4">
-              <h3 class="font-heading text-xl font-bold text-white">Clothing</h3>
-              <span class="text-white/70 text-xs">{{ clothingCount() }} pieces</span>
-            </div>
-          </a>
-
-          <!-- Accessories -->
-          <a
-            href="#catalog"
-            class="card group relative overflow-hidden cursor-pointer
-              focus-visible:ring-2 focus-visible:ring-primary"
-            (click)="filterByCategory('accessories')"
-            aria-label="Shop Accessories"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1584030373081-f37b7bb4fa8b?w=600&q=80"
-              alt="Accessories"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy" decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-text/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4">
-              <h3 class="font-heading text-xl font-bold text-white">Accessories</h3>
-              <span class="text-white/70 text-xs">Scarves, belts & more</span>
-            </div>
-          </a>
-
-          <!-- Shoes -->
-          <a
-            href="#catalog"
-            class="card group relative overflow-hidden cursor-pointer
-              focus-visible:ring-2 focus-visible:ring-primary"
-            (click)="filterByCategory('shoes')"
-            aria-label="Shop Shoes"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80"
-              alt="Shoes"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy" decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-text/60 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4">
-              <h3 class="font-heading text-xl font-bold text-white">Shoes</h3>
-              <span class="text-white/70 text-xs">Step in style</span>
-            </div>
-          </a>
-
-          <!-- Jewelry — wide -->
-          <a
-            href="#catalog"
-            class="col-span-2 card group relative overflow-hidden cursor-pointer
-              focus-visible:ring-2 focus-visible:ring-primary"
-            (click)="filterByCategory('jewelry')"
-            aria-label="Shop Jewelry"
-          >
-            <img
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80"
-              alt="Jewelry collection"
-              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy" decoding="async"
-            />
-            <div class="absolute inset-0 bg-gradient-to-r from-text/60 to-transparent"></div>
-            <div class="absolute inset-0 flex items-center">
-              <div class="ml-8">
-                <span class="badge badge-discount mb-2">Up to 40% off</span>
-                <h3 class="font-heading text-2xl font-bold text-white">Jewelry</h3>
-                <p class="text-white/80 text-sm mt-1">Earrings, necklaces & rings</p>
+        <!-- Category cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          @for (cat of categories(); track cat.slug) {
+            @if (cat.status === 'launching-soon') {
+              <div
+                class="card relative overflow-hidden aspect-[4/3] cursor-not-allowed"
+                [attr.aria-label]="cat.name + ' — launching soon'"
+              >
+                <img
+                  [src]="cat.image || placeholderImage"
+                  [alt]="cat.name"
+                  class="w-full h-full object-cover grayscale-[30%] opacity-70"
+                  loading="lazy" decoding="async"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-text/70 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span class="badge mb-2" style="background: var(--color-accent-dark); color: white;">
+                    {{ cat.teaserNote || 'Launching soon' }}
+                  </span>
+                  <h3 class="font-heading text-xl font-bold text-white">{{ cat.name }}</h3>
+                </div>
               </div>
-            </div>
-          </a>
+            } @else {
+              <a
+                href="#catalog"
+                class="card group relative overflow-hidden aspect-[4/3] cursor-pointer
+                  focus-visible:ring-2 focus-visible:ring-primary"
+                (click)="filterByCategory(cat.slug)"
+                [attr.aria-label]="'Shop ' + cat.name"
+              >
+                <img
+                  [src]="cat.image || placeholderImage"
+                  [alt]="cat.name + ' collection'"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy" decoding="async"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-text/70 via-text/20 to-transparent"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform">
+                  <h3 class="font-heading text-2xl font-bold text-white mb-1">{{ cat.name }}</h3>
+                  @if (cat.productCount) {
+                    <p class="text-white/80 text-sm mb-3 opacity-0 group-hover:opacity-100
+                      transition-opacity duration-300">
+                      {{ cat.productCount }} products
+                    </p>
+                  }
+                  <span class="inline-flex items-center gap-2 text-white/90 text-sm font-semibold
+                    group-hover:text-accent transition-colors">
+                    Shop now
+                    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            }
+          }
         </div>
 
         <!-- Promo banner -->
@@ -177,7 +102,7 @@ interface CollectionCard {
             <h3 class="font-heading text-3xl md:text-4xl font-bold text-white mb-2">
               Free Shipping<br class="hidden md:block" /> on Orders Over ₹2,999
             </h3>
-            <p class="text-white/80 text-base">Use code <strong class="text-accent">LUXESHIP</strong> at checkout</p>
+            <p class="text-white/80 text-base">Use code <strong class="text-accent">COZYSHIP</strong> at checkout</p>
           </div>
 
           <div class="relative z-10 flex flex-col sm:flex-row gap-3">
@@ -203,14 +128,14 @@ interface CollectionCard {
 })
 export class FeaturedCollectionsComponent {
   readonly waPhone = environment.whatsappPhone;
+  readonly placeholderImage = PLACEHOLDER_IMAGE;
   private productService = inject(ProductService);
   private uiState = inject(UiStateService);
 
-  clothingCount = computed(() =>
-    this.productService.products().filter((p) => p.categorySlug === 'clothing').length
-  );
+  categories = this.productService.categories;
 
   filterByCategory(slug: string): void {
     this.productService.updateFilter({ category: slug });
+    document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

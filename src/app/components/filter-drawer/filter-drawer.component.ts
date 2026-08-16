@@ -99,17 +99,25 @@ import { UiStateService } from '../../core/services/ui-state.service';
           @if (expandedSections().has('category')) {
             <div class="space-y-2 animate-slide-down">
               @for (cat of categories(); track cat.slug) {
-                <label class="flex items-center gap-3 cursor-pointer group">
+                <label class="flex items-center gap-3 group"
+                  [class.cursor-pointer]="cat.status !== 'launching-soon'"
+                  [class.cursor-not-allowed]="cat.status === 'launching-soon'"
+                  [class.opacity-60]="cat.status === 'launching-soon'"
+                  [attr.title]="cat.status === 'launching-soon' ? (cat.teaserNote || 'Launching soon') : null"
+                >
                   <input
                     type="checkbox"
                     [checked]="productService.filter().category === cat.slug"
+                    [disabled]="cat.status === 'launching-soon'"
                     (change)="toggleCategory(cat.slug)"
                     class="w-4 h-4 text-primary border-border focus:ring-primary rounded"
                   />
                   <span class="text-sm text-text-muted group-hover:text-text transition-colors flex-1">
                     {{ cat.name }}
                   </span>
-                  @if (cat.count) {
+                  @if (cat.status === 'launching-soon') {
+                    <span class="text-xs text-accent-dark font-medium">Soon</span>
+                  } @else if (cat.count) {
                     <span class="text-xs text-text-muted">{{ cat.count }}</span>
                   }
                 </label>

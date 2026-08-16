@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { STOREFRONT_CATEGORY_ALLOWLIST } from '../../core/config/storefront-categories.config';
 
 @Component({
   selector: 'app-footer',
@@ -45,13 +46,10 @@ import { environment } from '../../../environments/environment';
             <!-- Brand -->
             <div class="col-span-2 lg:col-span-2">
               <div class="flex items-center gap-2 mb-4">
-                <div class="w-9 h-9 rounded-full bg-gradient-luxury flex items-center justify-center">
-                  <span class="text-white font-bold font-heading">L</span>
-                </div>
-                <span class="font-heading font-bold text-xl text-white">Luxe Storefront</span>
+                <span class="font-heading font-bold text-xl text-white">Warm &amp; Cozy Home Decors</span>
               </div>
               <p class="text-white/60 text-sm leading-relaxed max-w-xs mb-6">
-                Premium fashion, bags and accessories. Crafted with care, curated for you.
+                Pure cotton home textiles and Indian wear, crafted with care and comfort.
                 Shipped across India.
               </p>
               <!-- Social links -->
@@ -138,7 +136,7 @@ import { environment } from '../../../environments/environment';
       <div class="border-t border-white/10 py-6">
         <div class="container-luxe flex flex-col sm:flex-row items-center justify-between
           gap-3 text-white/40 text-xs">
-          <p>© 2026 Luxe Storefront. All rights reserved.</p>
+          <p>© 2026 Warm & Cozy Home Decors. All rights reserved.</p>
           <div class="flex items-center gap-4">
             @for (link of legalLinks; track link.label) {
               <a [href]="link.href"
@@ -162,7 +160,7 @@ import { environment } from '../../../environments/environment';
 })
 export class FooterComponent {
   readonly socialLinks = [
-    { name: 'Instagram', emoji: '📸', href: '#' },
+    { name: 'Instagram', emoji: '📸', href: 'https://www.instagram.com/warmandcozyhomedecors' },
     { name: 'WhatsApp', emoji: '💬', href: 'https://wa.me/' + environment.whatsappPhone },
     { name: 'Facebook', emoji: '👤', href: '#' },
     { name: 'Pinterest', emoji: '📌', href: '#' },
@@ -170,10 +168,7 @@ export class FooterComponent {
 
   readonly shopLinks = [
     { label: 'New Arrivals', href: '#catalog' },
-    { label: 'Bags',         href: '#catalog' },
-    { label: 'Clothing',     href: '#catalog' },
-    { label: 'Accessories',  href: '#catalog' },
-    { label: 'Shoes',        href: '#catalog' },
+    ...STOREFRONT_CATEGORY_ALLOWLIST.map((c) => ({ label: c.displayName, href: '#catalog' })),
     { label: 'Sale',         href: '#catalog' },
   ];
 
@@ -187,8 +182,8 @@ export class FooterComponent {
 
   readonly contactItems = [
     { emoji: '💬', label: 'WhatsApp Us', href: 'https://wa.me/' + environment.whatsappPhone },
-    { emoji: '✉️', label: 'hello@luxe.com', href: 'mailto:hello@luxe.com' },
-    { emoji: '📸', label: '@luxe.store', href: '#' },
+    { emoji: '✉️', label: 'hello@warmandcozyhomedecors.com', href: 'mailto:hello@warmandcozyhomedecors.com' },
+    { emoji: '📸', label: '@warmandcozyhomedecors', href: 'https://www.instagram.com/warmandcozyhomedecors' },
   ];
 
   readonly trustBadges = [
